@@ -26,13 +26,14 @@ import lombok.Setter;
 @Entity
 //@Table(name = "tbl_proyecto")
 @NamedStoredProcedureQueries({
-	@NamedStoredProcedureQuery(name = "db_repaide.sp_creacionproyecto", procedureName = "sp_creacionproyecto", parameters = {
+	@NamedStoredProcedureQuery(name = "sp_creacionproyecto", procedureName = "sp_creacionproyecto", parameters = {
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "codigo", 				type = Long.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_codigomascara", 		type = String.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_nombre", 				type = String.class),
+			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_libro", 				type = Integer.class),
+			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_codigo_estado", 		type = Integer.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_usuariocrea", 			type = Integer.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_fechacrea", 			type = Date.class),
-			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_codigo_estado", 		type = Integer.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "opcionDML", 				type = Integer.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "codlast", 				type = String.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_error_id", 				type = Integer.class),
@@ -52,6 +53,9 @@ public class CrearProyectoModel {
 	
 	@Column(name = "nombre")
 	private String _nombre ;
+	
+	@Column(name = "_libro")
+	private Integer _libro;
 	
 	@Column(name = "usuariocrea")
 	private Integer _usuariocrea ;

@@ -27,7 +27,7 @@ import lombok.Setter;
 @Entity
 //@Table(name = "tbl_proyecto")
 @NamedStoredProcedureQueries({
-	@NamedStoredProcedureQuery(name = "db_repaide.SP_PRIORIZADO_BUENO", procedureName = "SP_PRIORIZADO_BUENO", parameters = {
+	@NamedStoredProcedureQuery(name = "SP_PRIORIZADO_BUENO", procedureName = "SP_PRIORIZADO_BUENO", parameters = {
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "codigo", 				type = Long.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_codigomascara", 		type = String.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_nombre", 				type = String.class),
@@ -42,6 +42,7 @@ import lombok.Setter;
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_fechacrea", 			type = Date.class),			
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_codigo_proyecto", 		type = Integer.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "opcionDML", 				type = Integer.class),
+			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_libro", 				type = Integer.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "codlast", 				type = String.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_error_id", 				type = Integer.class),
 			@StoredProcedureParameter(mode =  ParameterMode.INOUT, name = "_error_msg", 			type = String.class)
@@ -113,6 +114,11 @@ public class ProyectoPriorizadoModel {
 	@Transient
 	@Column(name = "opcionDML")
 	private Integer opcionDML ;
+	
+	@Transient
+	@Column(name = "_libro")
+	private Integer _libro;
+	
 	
 	@Transient
 	@Column(name = "codlast")

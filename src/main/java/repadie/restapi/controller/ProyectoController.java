@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
+import javax.transaction.*;
+//import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jayway.jsonpath.ParseContext;
 
 import repadie.restapi.Models.CrearProyectoModel;
 import repadie.restapi.Models.ProyectoPriorizadoModel;
+import repadie.restapi.Services.BuscarProyPriorizadoService;
 import repadie.restapi.Services.CrearProyectoService;
 import repadie.restapi.Services.ProyPriorizadoService;
+import repadie.restapi.Models.buscarProyPriorizado;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
@@ -33,6 +36,8 @@ public class ProyectoController {
 	@Autowired
 	CrearProyectoService  entityPryService;
 	
+	@Autowired
+	BuscarProyPriorizadoService entityBuscarPryPriorizadoService;
 //	@PostMapping("/crear")
 //	@Transactional
 //	List<Map<String, ?>> getProyectos(@RequestBody CrearProyectoModel pEntity){
@@ -87,7 +92,20 @@ public class ProyectoController {
 //		//lstGroupArea.add(groupA);
 //		return lstEntityRet;
 //	}
-//	
+//	http://85.239.248.78/repadiebackend/Proyecto/Priorizado
+	
+	@PostMapping("/BuscarPriorizado")
+	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	List<Map<String, ?>> buscarProyPriorizado (@RequestBody buscarProyPriorizado pEntity ){
+		List<Map<String, ?>> lstEntityRet = new ArrayList<Map<String,?>>();
+		
+//		buscarProyPriorizado pEntity2 = new buscarProyPriorizado();
+		lstEntityRet= entityBuscarPryPriorizadoService.BuscarProyPriorizado(pEntity);
+//		lstEntityRet.add(entityService.BuscarProyPriorizado(pEntity));
+		return lstEntityRet;
+		
+	}
+	
 	@PostMapping("/Priorizado")
 	@Transactional
 	List<Map<String, ?>> getProyectos(@RequestBody ProyectoPriorizadoModel pEntity){
@@ -102,6 +120,7 @@ public class ProyectoController {
 			pEntity2.setCodigo((long) 1);
 			pEntity2.set_codigomascara(pEntity.get_codigomascara());
 			pEntity2.set_nombre(pEntity.get_nombre());
+			pEntity2.set_libro(pEntity.get_libro());
 			pEntity2.set_usuariocrea(pEntity.get_usuariocrea());
 			pEntity2.set_fechacrea(pEntity.get_fechacrea());
 			pEntity2.set_codigo_estado(1);
@@ -110,7 +129,7 @@ public class ProyectoController {
 			pEntity2.set_error_id(pEntity.get_error_id());
 			pEntity2.set_error_msg(pEntity.get_error_msg());
 		
-			//hace el insert a la tabla proyectos
+			//hace el insert a la tabla proyectos priorizados
 			lstEntityRet2.add(entityPryService.DMLCrearProyecto(pEntity2));
 			if((int)lstEntityRet2.get(0).get("_error_id") == -42) {
 				System.out.println("Codigo del proyecto = " + lstEntityRet2.get(0).get("codlast").toString());
@@ -132,7 +151,9 @@ public class ProyectoController {
 			
 			
 		}else if (pEntity.getOpcionDML()== 2){
+			
 		}else if(pEntity.getOpcionDML() == 4) {
+			
 		};
 			
 		

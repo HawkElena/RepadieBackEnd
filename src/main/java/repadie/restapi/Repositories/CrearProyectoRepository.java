@@ -13,11 +13,12 @@ import repadie.restapi.Models.CrearProyectoModel;
 @Repository
 public interface CrearProyectoRepository extends JpaRepository<CrearProyectoModel, Long> {
 //	para realizar las operaciones de insert delete y update 
-	@Procedure(name = "db_repaide.sp_creacionproyecto")
+	@Procedure(name = "sp_creacionproyecto")
 	Map<String, ?> procDMLCreaProyecto(
 										Long 		codigo
 										, String 	_codigomascara
 										, String 	_nombre
+										, Integer	_libro
 										, Integer 	_usuariocrea
 										, Date		_fechacrea
 										, Integer 	_codigo_estado

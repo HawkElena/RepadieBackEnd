@@ -22,6 +22,7 @@ public class CrearProyectoServiceImpl implements CrearProyectoService {
 															pCrearProyecto.getCodigo()
 															, pCrearProyecto.get_codigomascara()
 															, pCrearProyecto.get_nombre()
+															, pCrearProyecto.get_libro()
 															, pCrearProyecto.get_usuariocrea()
 															,pCrearProyecto.get_fechacrea()
 															, pCrearProyecto.get_codigo_estado()															, pCrearProyecto.getOpcionDML()
